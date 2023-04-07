@@ -2,38 +2,59 @@ package br.com.aps.olookinhomeu.model.Look;
 
 import java.util.List;
 
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 import br.com.aps.olookinhomeu.model.PecaDeRoupa.PecaDeRoupa;
+import br.com.aps.olookinhomeu.model.PecaDeRoupa.Calcado;
+import br.com.aps.olookinhomeu.model.PecaDeRoupa.PecaDeRoupaInferior;
+import br.com.aps.olookinhomeu.model.PecaDeRoupa.PecaDeRoupaSuperior;
 
 @Component
 public class CadastroLook {
 
     @Autowired
     private IRepositorioLook repositorioLook;
+    private int counter;
+    
+    public void RepositorioUsuario() {
+		this.counter = 0;
+	}
+
 
     public void addLook(String nome, List<PecaDeRoupa> pecasDeRoupa) {
-
-        Look look = new Look();
+    	//vai precisar ser obrigatorio colocar pecasderoupa
 
         if (pecasDeRoupa.isEmpty()) { // checar se tem como tratar isso direto no front // tem, mas acho melhor ter
                                       // outro check // se for pra ter outro check, talvez seja uma excecao, mas dps a
                                       // gt checa
             throw new RuntimeException("Nao ha pecas de roupa para criar um look");
         } else {
+               	
+        	
+            Look look = new Look(nome, counter, 
+            					 null, 
+            					 null, 
+            					 null);
+            this.counter = this.counter++;
+        	
+        	
             for (PecaDeRoupa peca : pecasDeRoupa) {
                 String tipo = peca.getTipo();
 
                 switch (tipo) {
                     case "Calcado":
-                        look.setCalcado(peca);
+                    	Calcado calcado = new Calcado(peca.getNome(), peca.getTipo(), peca.getId());
+                        look.setCalcado(calcado);
                         break;
-                    case "Superior":
-                        look.setPecaDeRoupaSuperior(peca);
+                    case "PecaDeRoupaSuperior":
+                    	PecaDeRoupaSuperior superior = new PecaDeRoupaSuperior(peca.getNome(), peca.getTipo(), peca.getId());
+                        look.setPecaDeRoupaSuperior(superior);
                         break;
                     case "Inferior":
-                        look.setPecaDeRoupaInferior(peca);
+                    	PecaDeRoupaInferior inferior = new PecaDeRoupaInferior(peca.getNome(), peca.getTipo(), peca.getId());
+                      	look.setPecaDeRoupaInferior(inferior);
                         break;
                     default:
                         break; // talvez excecao
@@ -59,13 +80,16 @@ public class CadastroLook {
     
                     switch (tipo) {
                         case "Calcado":
-                            selectedLook.setCalcado(peca);
+                           	Calcado calcado = new Calcado(peca.getNome(), peca.getTipo(), peca.getId());
+                            selectedLook.setCalcado(calcado);
                             break;
                         case "Superior":
-                            selectedLook.setPecaDeRoupaSuperior(peca);
+                        	PecaDeRoupaSuperior pecaDeRoupaSuperior = new PecaDeRoupaSuperior(peca.getNome(), peca.getTipo(), peca.getId());
+                            selectedLook.setPecaDeRoupaSuperior(pecaDeRoupaSuperior);
                             break;
                         case "Inferior":
-                            selectedLook.setPecaDeRoupaInferior(peca);
+                        	PecaDeRoupaInferior pecaDeRoupaInferior = new PecaDeRoupaInferior(peca.getNome(), peca.getTipo(), peca.getId());
+                            selectedLook.setPecaDeRoupaInferior(pecaDeRoupaInferior);
                             break;
                         default:
                             break; // talvez excecao

@@ -16,12 +16,9 @@ public class ControladorPecaDeRoupa {
 	@Autowired
 	private CadastroPecaDeRoupa cadastroPecaDeRoupa;
 	
-	public void deletarPecaDeRoupa(Long id) {
-        cadastroPecaDeRoupa.deletarPecaDeRoupa(id);
-    }
 
-	public void cadastrarPecaDeRoupa(String nome, String tipo, byte[] imagemPath) throws IOException {
-		cadastroPecaDeRoupa.addPecaDeRoupa(nome, tipo, imagemPath);
+	public void cadastrarPecaDeRoupa(String nome, String tipo) throws IOException {
+		cadastroPecaDeRoupa.addPecaDeRoupa(nome, tipo);
 	}
 
 	public List<PecaDeRoupa> consultarPecasDeRoupa() {
@@ -30,6 +27,10 @@ public class ControladorPecaDeRoupa {
 
 	public PecaDeRoupa consultarPecaDeRoupaPeloId(Long id) {
     	return cadastroPecaDeRoupa.consultarPecaDeRoupaPeloId(id);
+    }
+	
+	public void deletarPecaDeRoupa(Long id) {
+        cadastroPecaDeRoupa.deletarPecaDeRoupa(id);
     }
 
 }

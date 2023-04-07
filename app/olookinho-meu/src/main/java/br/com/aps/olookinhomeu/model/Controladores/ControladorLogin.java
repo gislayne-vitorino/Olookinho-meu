@@ -24,7 +24,7 @@ public class ControladorLogin {
 		}
 
         Usuario usuario = cadastroUsuario.consultarUsuarioPorEmail(email);
-        Usuario.atual = usuario;
+        //Usuario.usuario = usuario;
         return usuario != null;
     }
 }

@@ -49,11 +49,12 @@ public class PecaDeRoupaController{
 	}
 
 	@PostMapping("")
-	public String cadastrarPecaDeRoupa(@RequestParam("nome") String nome, @RequestParam("tipo") String tipo,
-		@RequestParam("imagem") MultipartFile imagem, Model model) throws IOException {
+	public String cadastrarPecaDeRoupa(@RequestParam("nome") String nome, @RequestParam("tipo") String tipo) throws IOException
+			//,@RequestParam("imagem") MultipartFile imagem, Model model) throws IOException 
+	{
 
-		fachada.cadastrarPecaDeRoupa(nome, tipo, imagem.getBytes());
-		model.addAttribute("msg", "Peça de roupa cadastrada com sucesso!");
+		fachada.cadastrarPecaDeRoupa(nome, tipo);
+		//model.addAttribute("msg", "Peça de roupa cadastrada com sucesso!");
 
 		return "TelaListarPecasDeRoupa";
 	}

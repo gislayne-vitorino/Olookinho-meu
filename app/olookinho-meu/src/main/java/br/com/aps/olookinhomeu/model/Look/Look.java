@@ -1,69 +1,75 @@
 package br.com.aps.olookinhomeu.model.Look;
 
+import br.com.aps.olookinhomeu.model.PecaDeRoupa.Calcado;
 import br.com.aps.olookinhomeu.model.PecaDeRoupa.PecaDeRoupa;
-import jakarta.persistence.*;
+import br.com.aps.olookinhomeu.model.PecaDeRoupa.PecaDeRoupaInferior;
+import br.com.aps.olookinhomeu.model.PecaDeRoupa.PecaDeRoupaSuperior;
+//import jakarta.persistence.*;
 
-@Entity
-@Table(name = "Looks")
+//@Entity
 public class Look {
+	
+	
+	
+	private String nome;
+	private long id;
+	private PecaDeRoupaSuperior pecaDeRoupaSuperior;
+	private PecaDeRoupaInferior pecaDeRoupaInferior;
+	private Calcado calcado;
+	
+	
 
-    @Id
-    @Column(name = "id")
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
+	public String getNome() {
+		return nome;
+	}
 
-    @Column(name = "nome")
-    private String nome;
+	public void setNome(String nome) {
+		this.nome = nome;
+	}
 
-    @Column(name = "peca_de_roupa_superior")
-    private PecaDeRoupa pecaDeRoupaSuperior;
-    @Column(name = "peca_de_roupa_inferior")
-    private PecaDeRoupa pecaDeRoupaInferior;
-    @Column(name = "calcado")
-    private PecaDeRoupa calcado;
+	public long getId() {
+		return id;
+	}
 
-    public Long getId() {
-        return id;
-    }
+	public void setId(long id) {
+		this.id = id;
+	}
 
-    public void setId(Long id) {
-        this.id = id;
-    }
+	public PecaDeRoupaSuperior getPecaDeRoupaSuperior() {
+		return pecaDeRoupaSuperior;
+	}
 
-    public String getNome() {
-        return nome;
-    }
+	public void setPecaDeRoupaSuperior(PecaDeRoupaSuperior pecaDeRoupaSuperior) {
+		this.pecaDeRoupaSuperior = pecaDeRoupaSuperior;
+	}
 
-    public void setNome(String nome) {
-        this.nome = nome;
-    }
+	public PecaDeRoupaInferior getPecaDeRoupaInferior() {
+		return pecaDeRoupaInferior;
+	}
 
-    public PecaDeRoupa getPecaDeRoupaSuperior() {
-        return pecaDeRoupaSuperior;
-    }
+	public void setPecaDeRoupaInferior(PecaDeRoupaInferior pecaDeRoupaInferior) {
+		this.pecaDeRoupaInferior = pecaDeRoupaInferior;
+	}
 
-    public void setPecaDeRoupaSuperior(PecaDeRoupa pecaDeRoupaSuperior) {
-        this.pecaDeRoupaSuperior = pecaDeRoupaSuperior;
-    }
+	public Calcado getCalcado() {
+		return calcado;
+	}
 
-    public PecaDeRoupa getPecaDeRoupaInferior() {
-        return pecaDeRoupaInferior;
-    }
+	public void setCalcado(Calcado calcado) {
+		this.calcado = calcado;
+	}
 
-    public void setPecaDeRoupaInferior(PecaDeRoupa pecaDeRoupaInferior) {
-        this.pecaDeRoupaInferior = pecaDeRoupaInferior;
-    }
+	public Look(String nome, long id, PecaDeRoupaSuperior pecaDeRoupaSuperior, PecaDeRoupaInferior pecaDeRoupaInferior,
+			Calcado calcado) {
+		super();
+		this.nome = nome;
+		this.id = id;
+		this.pecaDeRoupaSuperior = pecaDeRoupaSuperior;
+		this.pecaDeRoupaInferior = pecaDeRoupaInferior;
+		this.calcado = calcado;
+	}
 
-    public PecaDeRoupa getCalcado() {
-        return calcado;
-    }
-
-    public void setCalcado(PecaDeRoupa calcado) {
-        this.calcado = calcado;
-    }
-
-
-    public LookMemento salvarMemento() {
+	public LookMemento salvarMemento() {
         return new LookMemento(this.nome, this.pecaDeRoupaSuperior, this.pecaDeRoupaInferior, this.calcado);
     }
 

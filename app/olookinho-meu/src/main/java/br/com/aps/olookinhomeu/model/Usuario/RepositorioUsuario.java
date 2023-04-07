@@ -6,39 +6,55 @@ import org.springframework.stereotype.Component;
 import java.util.List;
 import java.util.Optional;
 
+//repositorio cadastro aqui
+
 @Component
 public class RepositorioUsuario implements IRepositorioUsuario {
 
     @Autowired
-    private UsuarioDAO usuarioDAO;
+    private List<Usuario> usuario;
+    
 
-    @Override
-    public List<Usuario> consultarTodosUsuarios() {
-        return usuarioDAO.findAll();
-    }
 
     @Override
     public void adicionarUsuario(Usuario usuario) {
-        this.usuarioDAO.save(usuario);
+        this.usuario.add(usuario);
+    }
+    
+	@Override
+    public List<Usuario> consultarTodosUsuarios() {    	
+    	return usuario;
     }
 
     @Override
     public Usuario consultarUsuarioPorId(long id) {
-        Optional<Usuario> optional = usuarioDAO.findById(id);
-        Usuario usuario = null;
-        if(optional.isPresent()) {
-            usuario = optional.get();
+    	Usuario usuarioencontrado = null;
+    	boolean encontrado = false;
+       for(int i =0; i<= this.usuario.size(); i++ ) {
+    	   if (this.usuario.get(i).getId() == id) {
+    		   usuarioencontrado = this.usuario.get(i);
+    		   encontrado =true;
+    	   }
+       }
+        if(encontrado == true) {
+            return usuarioencontrado;
         } else {
             throw new RuntimeException("Usuario com id " + id + " não encontrado");
         }
-        return usuario;
     }
 
     @Override
     public Usuario consultarUsuarioPorEmail(String email) {
-        Usuario usuario = usuarioDAO.findFirstByEmail(email);
-        if(usuario != null) {
-            return usuario;
+    	Usuario usuarioencontrado = null;
+    	boolean encontrado = false;
+       for(int i =0; i<= this.usuario.size(); i++ ) {
+    	   if (this.usuario.get(i).getEmail() == email) {
+    		   usuarioencontrado = this.usuario.get(i);
+    		   encontrado =true;
+    	   }
+       }
+        if(encontrado == true) {
+            return usuarioencontrado;
         } else {
             throw new RuntimeException("Usuario com email " + email + " não encontrado");
         }
@@ -46,6 +62,10 @@ public class RepositorioUsuario implements IRepositorioUsuario {
 
     @Override
     public void deletarUsuarioPorId(long id) {
-        usuarioDAO.deleteById(id);
+        for(int i =0; i<= this.usuario.size(); i++ ) {
+     	   if (this.usuario.get(i).getId() == id) {
+     		   this.usuario.remove(i);
+     	   }
+        }
     }
 }

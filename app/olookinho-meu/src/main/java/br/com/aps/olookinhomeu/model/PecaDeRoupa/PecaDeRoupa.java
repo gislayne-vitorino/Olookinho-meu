@@ -1,54 +1,43 @@
 package br.com.aps.olookinhomeu.model.PecaDeRoupa;
 
-import jakarta.persistence.*;
+//import jakarta.persistence.*;
 
-@Entity
-@Table(name = "PecasDeRoupa")
+//@Entity
 public class PecaDeRoupa {
 
-    @Id
-    @Column(name = "id")
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
+	private String nome;
+	private String tipo;
+	private long id;
+	
+	public PecaDeRoupa(String nome, String tipo, long id) {
+		this.nome = nome;
+		this.tipo = tipo;
+		this.id = id;
+	}
 
-    @Column(name = "nome")
-    private String nome;
+	public String getNome() {
+		return nome;
+	}
 
-    @Column(name = "tipo")
-    private String tipo;
+	public void setNome(String nome) {
+		this.nome = nome;
+	}
 
-    @Lob
-    private byte[] imagem;
+	public String getTipo() {
+		return tipo;
+	}
 
-    public Long getId() {
-        return id;
-    }
+	public void setTipo(String tipo) {
+		this.tipo = tipo;
+	}
 
-    public void setId(Long id) {
-        this.id = id;
-    }
+	public long getId() {
+		return id;
+	}
 
-    public String getNome() {
-        return nome;
-    }
+	public void setId(long id) {
+		this.id = id;
+	}
 
-    public void setNome(String nome) {
-        this.nome = nome;
-    }
-
-    public String getTipo() {
-        return tipo;
-    }
-
-    public void setTipo(String tipo) {
-        this.tipo = tipo;
-    }
-
-    public byte[] getImagem() {
-        return imagem;
-    }
-
-    public void setImagem(byte[] imagem){
-        this.imagem = imagem;
-    }
+	
 }

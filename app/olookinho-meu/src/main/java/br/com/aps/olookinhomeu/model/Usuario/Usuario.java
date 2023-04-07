@@ -1,21 +1,19 @@
 package  br.com.aps.olookinhomeu.model.Usuario;
 
-import jakarta.persistence.*;
+//import jakarta.persistence.*;
 
-@Entity
-@Table(name = "usuarios")
+//@Entity
 public class Usuario {
 
-    public static Usuario atual;
-
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private long id;
-    @Column(name = "nome")
-    private String nome;
-
-    @Column(name = "email", unique = true)
-    private String email;
+	private String nome;
+	private String email;
+	private long id;
+	
+	public Usuario(String nome, String email, long id) {
+		this.nome = nome;
+		this.email = email;
+		this.id = id;
+	}
 
     public long getId() {
         return id;

@@ -10,16 +10,19 @@ public class CadastroUsuario {
 
     @Autowired
     private IRepositorioUsuario repositorioUsuario;
+    private int counter;
+    
+    public void RepositorioUsuario() {
+		this.counter = 0;
+	}
 
     public List<Usuario> consultarTodosUsuarios() {
         return repositorioUsuario.consultarTodosUsuarios();
     }
 
     public void adicionarUsuario(String nome, String email) {
-        Usuario usuario = new Usuario();
-        usuario.setNome(nome);
-        usuario.setEmail(email);
-
+        Usuario usuario = new Usuario(nome, email, this.counter);
+        this.counter++;
         repositorioUsuario.adicionarUsuario(usuario);
     }
 

@@ -43,9 +43,9 @@ public class Fachada {
 		controladorLook.deletarLook(id);
 	}
 
-	public void cadastrarPecaDeRoupa(String nome, String tipo, byte[] imagemData) throws IOException {
+	public void cadastrarPecaDeRoupa(String nome, String tipo) throws IOException {
 				
-		controladorPecaDeRoupa.cadastrarPecaDeRoupa(nome, tipo, imagemData);
+		controladorPecaDeRoupa.cadastrarPecaDeRoupa(nome, tipo);
 	}
 
 	public void deletarPecaDeRoupa(Long id) {

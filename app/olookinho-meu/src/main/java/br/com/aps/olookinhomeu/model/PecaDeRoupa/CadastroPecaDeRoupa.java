@@ -13,19 +13,27 @@ import br.com.aps.olookinhomeu.model.PecaDeRoupa.Factories.*;
 @Component
 public class CadastroPecaDeRoupa{
 
-    AbstractFactory fabricaSuperior = new FabricaPecaDeRoupaSuperior();
-    AbstractFactory fabricaInferior = new FabricaPecaDeRoupaInferior();
-    AbstractFactory fabricaCalcado = new FabricaCalcado();
+    Factory fabricaSuperior = new FabricaPecaDeRoupaSuperior();
+    Factory fabricaInferior = new FabricaPecaDeRoupaInferior();
+    Factory fabricaCalcado = new FabricaCalcado();
+    
+    private int counter;
+    
+    public void RepositorioUsuario() {
+		this.counter = 0;
+	}
+
 
     @Autowired
     private IRepositorioPecaDeRoupa repositorioPecaDeRoupa;
 
-    public void addPecaDeRoupa(String nome, String tipo, byte[] imagemData) throws IOException{
-    
-        PecaDeRoupa pecaDeRoupa = gerarPecadeRoupa(tipo);
+    public void addPecaDeRoupa(String nome, String tipo) throws IOException{
+    	long id = this.counter;
+    	this.counter = this.counter++;
+        PecaDeRoupa pecaDeRoupa = gerarPecadeRoupa(nome,tipo , id);
         
-        pecaDeRoupa.setNome(nome);
-        pecaDeRoupa.setImagem(imagemData);
+        //pecaDeRoupa.setNome(nome);
+        //pecaDeRoupa.setImagem(imagemData);
 
         repositorioPecaDeRoupa.addPecaDeRoupa(pecaDeRoupa);
     }
@@ -42,18 +50,18 @@ public class CadastroPecaDeRoupa{
     return repositorioPecaDeRoupa.consultarPecaDeRoupaPeloID(id);
     }
 
-    private PecaDeRoupa gerarPecadeRoupa(String tipo) {
-        PecaDeRoupa pecaDeRoupa = new PecaDeRoupa();
+    private PecaDeRoupa gerarPecadeRoupa(String nome, String tipo, long id) {
+        PecaDeRoupa pecaDeRoupa = null;
 
         switch (tipo) {
             case "Superior":
-                pecaDeRoupa = fabricaSuperior.createPecaDeRoupa();
+                pecaDeRoupa = fabricaSuperior.createPecaDeRoupa(nome, tipo, id);
                  break;
             case "Inferior":
-                pecaDeRoupa = fabricaInferior.createPecaDeRoupa();
+                pecaDeRoupa = fabricaInferior.createPecaDeRoupa(nome, tipo, id);
                  break;
             case "Calcado":
-                pecaDeRoupa = fabricaCalcado.createPecaDeRoupa();
+                pecaDeRoupa = fabricaCalcado.createPecaDeRoupa(nome, tipo, id);
                  break;
             default:
                 break;
